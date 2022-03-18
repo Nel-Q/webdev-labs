@@ -12,12 +12,21 @@ class App extends React.Component {
             <div>
                 <NavBar title="Photo App" username="my user" />
                 <aside>
-                    <Profile />
-                    <Suggestions />
+                    <header>
+                        <Profile />
+                    </header>
+                    <div className="suggestions">
+                        <p className="suggestion-text">Suggestions for you</p>
+                        <div>
+                            <Suggestions />
+                        </div>
+                    </div>
                 </aside>
 
                 <main className="content">
-                    <Stories />
+                    <header className="stories">
+                        <Stories />
+                    </header>
                     <Posts />
                 </main>
             </div>

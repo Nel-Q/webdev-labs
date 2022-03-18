@@ -22,11 +22,17 @@ class Posts extends React.Component {
             })
             .then(response => response.json())
             .then(data => {
+                console.log(data)
                 this.setState({ posts: data });
             })
     }
     
     render () {
+        if (!this.state.posts) {
+            return(
+                <div></div>
+            )
+        }
         return (
             <div id="posts">
                 {

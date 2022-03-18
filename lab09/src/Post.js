@@ -2,6 +2,8 @@ import React from 'react';
 import LikeButton from './LikeButton';
 import BookmarkButton from './BookmarkButton';
 import {getHeaders} from './utils';
+import AddComment from './AddComment';
+import Comments from './Comments';
 
 class Post extends React.Component {  
 
@@ -63,9 +65,16 @@ class Post extends React.Component {
                                 requeryPost={this.requeryPost} />
                         </div>
                     </div>
-                    
-                    <p><strong>{post.user.username}</strong>
-                        {post.caption}</p>
+                    <p className='likes'>
+                        <strong>{ post.likes.length }  { post.likes.length > 1 ? 'likes' : 'like'}</strong>
+                    </p>
+                    <div className='caption'>
+                        <p><strong>{post.user.username}</strong>
+                            {post.caption}</p>
+                        <p className='timestamp'>{ post.display_time }</p>
+                    </div>
+                    <Comments comments={post.comments} />
+                    <AddComment requeryPost={this.requeryPost} postId={post.id} />
                 </div>
             </section> 
         );     

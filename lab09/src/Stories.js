@@ -1,21 +1,42 @@
 import React from 'react';
+import Story from './Story'
+import {getHeaders} from './utils';
 
 class Stories extends React.Component {  
 
     constructor(props) {
         super(props);
-        // constructor logic
-        console.log('Stories component created');
+        this.state = { stories: []};
+        this.fetchStories = this.fetchStories.bind(this);
     }
 
     componentDidMount() {
-        // fetch posts
-        console.log('Stories component mounted');
+        this.fetchStories();
+    }
+
+    fetchStories(){
+        fetch('/api/stories', {
+          headers:getHeaders()  
+        })
+        .then(response => response.json())
+        .then(data => {
+            this.setState({ stories: data})
+        })
+
     }
     render () {
-        return (
-            <header className="stories"></header>  
-        );
+       if (!this.state.stories) {
+           return (
+               <div></div>
+           );
+       }
+       return (
+           this.state.stories.map(story => {
+               return (
+                   <Story model={story} key={'story-' + story.id} />
+               )
+           })
+       )
     }
 }
 
